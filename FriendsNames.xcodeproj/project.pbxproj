@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7D2483126C2B62000E4BD80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2483026C2B62000E4BD80 /* UserInfo.swift */; };
 		D7D69C2426B984030064F4E9 /* FriendsNamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69C2326B984030064F4E9 /* FriendsNamesApp.swift */; };
 		D7D69C2626B984030064F4E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69C2526B984030064F4E9 /* ContentView.swift */; };
 		D7D69C2826B9840C0064F4E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7D69C2726B9840C0064F4E9 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D7D2483026C2B62000E4BD80 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		D7D69C2026B984030064F4E9 /* FriendsNames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsNames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D69C2326B984030064F4E9 /* FriendsNamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNamesApp.swift; sourceTree = "<group>"; };
 		D7D69C2526B984030064F4E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				D7D69C2326B984030064F4E9 /* FriendsNamesApp.swift */,
 				D7D69C3726B9884A0064F4E9 /* ImagePicker.swift */,
 				D7E14B0326BC277300F4AAF4 /* EditScreen.swift */,
+				D7D2483026C2B62000E4BD80 /* UserInfo.swift */,
 				D7D69C2526B984030064F4E9 /* ContentView.swift */,
 				D7D69C2726B9840C0064F4E9 /* Assets.xcassets */,
 				D7D69C2C26B9840C0064F4E9 /* Persistence.swift */,
@@ -155,6 +158,7 @@
 				D7D69C3826B9884A0064F4E9 /* ImagePicker.swift in Sources */,
 				D7D69C2626B984030064F4E9 /* ContentView.swift in Sources */,
 				D7D69C2426B984030064F4E9 /* FriendsNamesApp.swift in Sources */,
+				D7D2483126C2B62000E4BD80 /* UserInfo.swift in Sources */,
 				D7E14B0426BC277300F4AAF4 /* EditScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

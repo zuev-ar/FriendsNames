@@ -24,18 +24,18 @@ struct ContentView: View {
             VStack {
                 List {
                     ForEach(friends) { friend in
-                        HStack {
-                            if let image = loadImage(imageName: friend.imageName!) {
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(Circle())
-                                    .frame(width: 80, height: 80)
-                            }
-                            VStack (alignment: .leading) {
-                                Text(friend.name!)
-//                                Text(String(describing: friend.imageName!))
-//                                    .font(Font.custom("SFUIDisplay-Light", size: 10))
+                        NavigationLink(destination: UserInfo(imageName: friend.imageName!, name: friend.name!).environment(\.managedObjectContext, viewContext)) {
+                            HStack() {
+                                if let image = loadImage(imageName: friend.imageName!) {
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(Circle())
+                                        .frame(width: 50, height: 50)
+                                }
+                                VStack (alignment: .leading) {
+                                    Text(friend.name!)
+                                }
                             }
                         }
                     }
@@ -52,6 +52,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                 })
             }
+            .navigationTitle(Text("Friends names"))
             .sheet(isPresented: $showingEditScreen, onDismiss: addFriend) {
                 EditScreen(name: $name)
             }
@@ -74,6 +75,7 @@ struct ContentView: View {
             if let jpegData = uiImage.jpegData(compressionQuality: 0.8) {
                 try? jpegData.write(to: imagePath, options: .atomic)
             }
+            name = ""
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
