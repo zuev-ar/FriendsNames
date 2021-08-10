@@ -13,6 +13,8 @@
 		D7D69C2B26B9840C0064F4E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7D69C2A26B9840C0064F4E9 /* Preview Assets.xcassets */; };
 		D7D69C2D26B9840C0064F4E9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69C2C26B9840C0064F4E9 /* Persistence.swift */; };
 		D7D69C3026B9840C0064F4E9 /* FriendsNames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7D69C2E26B9840C0064F4E9 /* FriendsNames.xcdatamodeld */; };
+		D7D69C3826B9884A0064F4E9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69C3726B9884A0064F4E9 /* ImagePicker.swift */; };
+		D7E14B0426BC277300F4AAF4 /* EditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E14B0326BC277300F4AAF4 /* EditScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		D7D69C2C26B9840C0064F4E9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D7D69C2F26B9840C0064F4E9 /* FriendsNames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendsNames.xcdatamodel; sourceTree = "<group>"; };
 		D7D69C3126B9840C0064F4E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7D69C3726B9884A0064F4E9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D7E14B0326BC277300F4AAF4 /* EditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				D7D69C2326B984030064F4E9 /* FriendsNamesApp.swift */,
+				D7D69C3726B9884A0064F4E9 /* ImagePicker.swift */,
+				D7E14B0326BC277300F4AAF4 /* EditScreen.swift */,
 				D7D69C2526B984030064F4E9 /* ContentView.swift */,
 				D7D69C2726B9840C0064F4E9 /* Assets.xcassets */,
 				D7D69C2C26B9840C0064F4E9 /* Persistence.swift */,
@@ -146,8 +152,10 @@
 			files = (
 				D7D69C3026B9840C0064F4E9 /* FriendsNames.xcdatamodeld in Sources */,
 				D7D69C2D26B9840C0064F4E9 /* Persistence.swift in Sources */,
+				D7D69C3826B9884A0064F4E9 /* ImagePicker.swift in Sources */,
 				D7D69C2626B984030064F4E9 /* ContentView.swift in Sources */,
 				D7D69C2426B984030064F4E9 /* FriendsNamesApp.swift in Sources */,
+				D7E14B0426BC277300F4AAF4 /* EditScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

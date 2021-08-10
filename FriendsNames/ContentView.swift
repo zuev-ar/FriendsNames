@@ -10,68 +10,107 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @FetchRequest(entity: Friend.entity(), sortDescriptors: [])
+    private var friends: FetchedResults<Friend>
+    
+    @State private var name = ""
+    @State private var image: Image?
+    @State private var inputImage: UIImage?
+    @State private var showingImagePicker = false
+    @State private var showingEditScreen = false
 
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(friends) { friend in
+                        HStack {
+                            if let image = loadImage(imageName: friend.imageName!) {
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                                    .frame(width: 80, height: 80)
+                            }
+                            VStack (alignment: .leading) {
+                                Text(friend.name!)
+//                                Text(String(describing: friend.imageName!))
+//                                    .font(Font.custom("SFUIDisplay-Light", size: 10))
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteFriend)
+                }
+                .sheet(isPresented: $showingImagePicker, onDismiss: {
+                    self.showingEditScreen = self.inputImage != nil
+                }) {
+                    ImagePicker(image: self.$inputImage)
+                }
+                .navigationBarItems(trailing: Button(action: {
+                    self.showingImagePicker = true
+                }) {
+                    Image(systemName: "plus")
+                })
             }
-            .onDelete(perform: deleteItems)
-        }
-        .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
+            .sheet(isPresented: $showingEditScreen, onDismiss: addFriend) {
+                EditScreen(name: $name)
             }
         }
     }
 
-    private func addItem() {
+    private func addFriend() {
+        guard let uiImage = inputImage else { return }
+        image = Image(uiImage: uiImage)
+        let imageName = UUID().uuidString
+        
+        let newFriend = Friend(context: viewContext)
+        newFriend.name = name
+        newFriend.imageName = imageName
+        
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        
+        do {
+            try viewContext.save()
+            if let jpegData = uiImage.jpegData(compressionQuality: 0.8) {
+                try? jpegData.write(to: imagePath, options: .atomic)
+            }
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+    private func deleteFriend(offsets: IndexSet) {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            offsets.map { friends[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    
+    func loadImage(imageName: String) -> Image? {
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        
+        do {
+            let data = try Data(contentsOf: imagePath)
+            guard let uiImage = UIImage(data: data) else { return nil }
+            return Image(uiImage: uiImage)
+        } catch {
+            print("Unable to load saved data.")
+            return nil
         }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
